@@ -17,7 +17,6 @@ class CreateProdutosTable extends Migration
             $table->date('data_compra');
             $table->integer('tempo_garantia_meses');
             $table->text('observacao')->nullable();
-            $table->string('image')->nullable();
             $table->foreignId('user_id')->constrained();
         });
     }

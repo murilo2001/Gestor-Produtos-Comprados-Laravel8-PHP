@@ -58,4 +58,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /* Function para criação de relação entre usuario e produto */
+    public function produtos(){
+        /* hasMany =  um usuario pode ter muitos produtos  */
+        return $this->hasMany('App\Models\Evento');
+    }
 }
