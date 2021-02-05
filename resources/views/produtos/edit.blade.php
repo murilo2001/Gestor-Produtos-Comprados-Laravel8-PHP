@@ -21,10 +21,15 @@
         <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do Produto" value="{{ $produto->nome }}">
     </div>
     <br>
-    <div class="form-group">
-        <label for="categoria">Categoria:</label>
-        <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Nome do Categoria" value="{{ $produto->categoria }}">
-    </div>
+        <div class="form-group">
+            <label for="categoria">Categoria:</label>
+
+                <select class="custom-select" id="categoria" name="categoria">
+                    @foreach($categorias as $categoria)
+                        <option value="{{$categoria->nome}}">{{$categoria->nome}}</option>
+                    @endforeach
+                </select>
+        </div>
     <br>
     <div class="form-group">
         <label for="valor">Valor:</label>

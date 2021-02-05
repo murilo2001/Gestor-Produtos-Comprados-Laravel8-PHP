@@ -14,7 +14,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Participantes</th>
+                <th scope="col">Categoria</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
             <tr>
                 <td scope="row">{{ $loop->index + 1 }}</td>
                 <td><a href="/produtos/{{ $produto->id }}">{{ $produto->nome }}</a></td>
-                <td>0</td>
+                <td><a href="/produtos/{{ $produto->id }}">{{ $produto->categoria }}</a></td>
                 <td>
                     <a href="/produtos/edit/{{ $produto->id }}" class="btn btn-info edit-btn"><ion-icon name="create-outline"></ion-icon> Editar</a> 
                     <form action="/produtos/{{ $produto->id }}" method="POST">

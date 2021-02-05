@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\User;
+use App\Models\Categoria;
 use Response;
 
 class ProdutoController extends Controller
@@ -16,11 +17,14 @@ class ProdutoController extends Controller
 
     public function create()
     {
-        return view('produtos.cadastrar');
+        $categorias = Categoria::all();
+
+        return view('produtos.cadastrar',['categorias'=> $categorias]);
     }
 
     public function store(Request $request)
     {
+
         /* Cria uma nova entidade Produto*/
         $produto = new Produto;
 
@@ -35,6 +39,13 @@ class ProdutoController extends Controller
         $produto->tempo_garantia_meses = $request->tempo_garantia_meses;
         $produto->observacao = $request->observacao;
         $produto->user_id = $user->id;
+
+        /* Resgata o ID da categoria selecionada pelo usuario */
+        $categoriaId = Categoria::where([
+            ['nome', '=', $request->categoria]
+        ])->get()[0]->id;
+        
+        $produto->categoria_id = $categoriaId;
 
         /* Image Upload*/
         /* Verifica se possui alguma imagem no request e se ela é valida */
@@ -65,7 +76,10 @@ class ProdutoController extends Controller
         /* O metodo estatico findOrFail ou firstOrFail recupera o primeiro resultado da consulta, porem caso
         não retornar nada dispara uma Exception = Illuminate\Database\Eloquent\ModelNotFoundException */
         $produto = Produto::findOrFail($id);
-        return view('produtos.edit',['produto' => $produto]);
+
+        $categorias = Categoria::all();
+
+        return view('produtos.edit',['produto' => $produto, 'categorias' => $categorias]);
     }
 
     public function update(Request $request)
@@ -134,5 +148,16 @@ class ProdutoController extends Controller
         $produto = Produto::findOrFail($id)->delete();
 
         return redirect('/dashboard')->with('msg', 'Produto excluido com sucesso');
+    }
+
+    public function store_categoria(Request $request)
+    {
+        /* Cria uma nova entidade Produto*/
+        $categoria = new Categoria;
+
+        /* Seta os atributos à entidade*/
+        $categoria->nome = $request->nome_categoria;
+        $categoria->save();
+        return redirect('/produtos/cadastrar')->with('msg', 'Categoria criada com sucesso');
     }
 }

@@ -24,4 +24,9 @@ class Produto extends Model
         /* belongsTo =  um produto pertence a um usuario, retorna apenas o produto pertecenten ao dono */
         return $this->belongsTo('App/Models/User');
     }
+
+    public function categoria(){
+        /* belongsTo =  um produto pertence a uma categoria, retorna apenas o produto pertecenten a categoria */
+        return $this->belongsTo('App/Models/Categoria');
+    }
 }

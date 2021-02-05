@@ -29,3 +29,6 @@ Route::get('/dashboard', [ProdutoController::class, 'dashboard'])->middleware('a
 
 /* Rota DELETE para redirecionar usuario para a action destroy cujá função é a deleção de um registro do banco de dados */
 Route::delete('/produtos/{id}', [ProdutoController::class, 'destroy'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados
+
+/* Rota POST para encaminhar request para action (store_categoria) cujá função é o cadastro de categorias no banco de dados */
+Route::post('/categorias',[ProdutoController::class, 'store_categoria'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados

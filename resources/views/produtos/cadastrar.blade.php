@@ -21,7 +21,15 @@
         <br>
         <div class="form-group">
             <label for="categoria">Categoria:</label>
-            <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Categoria do Produto">
+            <div class="btn-group inline">
+                <select class="custom-select" id="categoria" name="categoria">
+                    @foreach($categorias as $categoria)
+                        <option value="{{$categoria->nome}}">{{$categoria->nome}}</option>
+                        <!-- <option value="{{ $categoria->nome }}" {{ ( $categoria->id == $categoria->id) ? 'selected' : '' }}> {{ $categoria->nome }} </option> -->
+                    @endforeach
+                </select>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"><ion-icon name="add-outline"></ion-icon></button>
+            </div>
         </div>
         <br>
         <div class="form-group">
@@ -46,5 +54,35 @@
         <input type="submit" class="btn btn-primary" value="Cadastrar Produto">
     </form>
 </div>
+
+{{-- Inicio Modal Categoria --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Nova Categoria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/categorias" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-body">
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome_categoria" name="nome_categoria" placeholder="Nome da Categoria do Produto">
+            </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary">Criar categoria</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{-- FIM Modal Categoria --}}
 
 @endsection

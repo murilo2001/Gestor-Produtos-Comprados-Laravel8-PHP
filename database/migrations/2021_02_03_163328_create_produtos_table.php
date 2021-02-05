@@ -18,6 +18,8 @@ class CreateProdutosTable extends Migration
             $table->integer('tempo_garantia_meses');
             $table->text('observacao')->nullable();
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id')->on('categorias');
         });
     }
 

@@ -3,6 +3,7 @@
 /public/storage
 /storage/*.key
 /vendor
+/public/img/nota_fiscal_img_upload_user
 .env
 .env.backup
 .phpunit.result.cache
@@ -11,3 +12,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
