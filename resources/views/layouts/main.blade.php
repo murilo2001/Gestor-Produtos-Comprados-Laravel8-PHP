@@ -22,7 +22,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="collapse navbar-collapse" id="navbar">
                 <a href="/" class="navbar-brand">
-                    <img src="/img/gestoreventos_logo.svg" alt="Gestor de Eventos">
+                    <img src="/img/gestorprodutos_logo.svg" alt="Gestor de Produtos Comprados">
                 </a>
                 <ul class="navbar-nav">
                     <li class="nav-item">

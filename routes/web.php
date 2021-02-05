@@ -19,11 +19,13 @@ Route::get('/produtos/edit/{id}', [ProdutoController::class, 'edit'])->middlewar
 Route::put('/produtos/update/{id}', [ProdutoController::class, 'update'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados
 
 /* Rota GET para redirecionar usuario para view de espeção do produto */
-Route::get('/produtos/{id}', [ProdutoController::class, 'show']);
+Route::get('/produtos/{id}', [ProdutoController::class, 'show'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados
 
 /* Rota GET para redirecionar usuario para view de edição de produto */
 Route::get('/produtos/download/{id}', [ProdutoController::class, 'download_nota_fiscal_image'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+/* Rota GET para redirecionar usuario para view dashboard */
+Route::get('/dashboard', [ProdutoController::class, 'dashboard'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados
+
+/* Rota DELETE para redirecionar usuario para a action destroy cujá função é a deleção de um registro do banco de dados */
+Route::delete('/produtos/{id}', [ProdutoController::class, 'destroy'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados

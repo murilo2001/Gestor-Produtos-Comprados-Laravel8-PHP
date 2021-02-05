@@ -5,30 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use App\Models\User;
+use Response;
 
 class ProdutoController extends Controller
 {
-    public function index(){
-
-        $search = request('search');
-
-        if($search){
-            $produtos = Produto::where([
-                ['nome', 'like', '%'.$search.'%']
-            ])->get();
-        }else{
-            $produtos = Produto::all();
-        }
-        
-        return view('welcome',['produtos' => $produtos, 'search' => $search]);
+    public function index()
+    {     
+        return view('welcome');
     }
 
-    public function create(){
+    public function create()
+    {
         return view('produtos.cadastrar');
     }
 
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         /* Cria uma nova entidade Produto*/
         $produto = new Produto;
 
@@ -50,15 +42,16 @@ class ProdutoController extends Controller
             
             /* Resgata a imagem da request */
             $requestImage = $request->nota_fiscal_image;
+
             /* Resgata a extensão da imagem */
             $extension = $requestImage->extension();
+
             /* Resgata o nome da imagem concatenado com o tempo now (agora) concatenado com a extensao
             OBS: O md5 gera uma string alfa-numérica de 32 caracteres */
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-            
+
             /* Move a imagem que foi feito o upload para a pasta img/nota_fiscal_img_upload_user */
             $requestImage->move(public_path('img/nota_fiscal_img_upload_user'), $imageName);
-
             $produto->nota_fiscal_image = $imageName;
         }
 
@@ -67,15 +60,16 @@ class ProdutoController extends Controller
         return redirect('/')->with('msg','Produto cadastrado com sucesso');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         /* O metodo estatico findOrFail ou firstOrFail recupera o primeiro resultado da consulta, porem caso
         não retornar nada dispara uma Exception = Illuminate\Database\Eloquent\ModelNotFoundException */
         $produto = Produto::findOrFail($id);
         return view('produtos.edit',['produto' => $produto]);
     }
 
-    public function update(Request $request){
-
+    public function update(Request $request)
+    {
         $entidade = $request->all();
 
         /* Image Upload*/
@@ -100,20 +94,45 @@ class ProdutoController extends Controller
         return redirect('/dashboard')->with('msg', 'Produto editado com sucesso');
     }
     
-    public function show($id){
-
+    public function show($id)
+    {
         /* O metodo estatico findOrFail ou firstOrFail recupera o primeiro resultado da consulta, porem caso
         não retornar nada dispara uma Exception = Illuminate\Database\Eloquent\ModelNotFoundException */
         $produto = Produto::findOrFail($id);
 
-        /* Irá retornar a entidade do usuario cujo id foi resgatado na função */
-        $donoEvento = User::where('id', '=', $produto->user_id)->first()->toArray();
-
-        /* Retorna a view eventos.show e envia o evento contido na variavel $evento para lá */
-        return view('produtos.show', ['produto' => $produto, 'donoEvento' => $donoEvento]);
+        /* Retorna a view produtos.show e envia o produto contido na variavel $produto para lá */
+        return view('produtos.show', ['produto' => $produto]);
     }
 
     public function download_nota_fiscal_image($id){
-        echo 'teste';
+        $produto = Produto::findOrFail($id);
+        if($produto->nota_fiscal_image){
+            $filepath = public_path('img/nota_fiscal_img_upload_user/'.$produto->nota_fiscal_image);
+            return Response::download($filepath);
+        }else{
+            return view('produtos.show', ['produto' => $produto]);
+        }
+    }
+
+    public function dashboard()
+    {
+        /* Resgata a entidade do usuario atenticado */
+        $user = auth()->user();
+
+        /* Resgata todos produtos do usuario */
+        $produtos = $user->produtos;
+
+        /* Retorna todos os produtos para a view dashboard */
+        return view('dashboard', ['produtos' => $produtos]);
+    }
+
+    public function destroy($id)
+    {
+        /* O metodo estatico findOrFail ou firstOrFail recupera o primeiro resultado da consulta, porem caso
+        não retornar nada dispara uma Exception = Illuminate\Database\Eloquent\ModelNotFoundException,
+        o ->delete() apaga esse registro do banco caso encontrar */
+        $produto = Produto::findOrFail($id)->delete();
+
+        return redirect('/dashboard')->with('msg', 'Produto excluido com sucesso');
     }
 }

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div id="evento-create-container" class="col-md-6 offset-md-3">
+<div id="produto-create-container" class="col-md-6 offset-md-3">
     <h1>Editando: {{ $produto->nome }}</h1>
     <br>
     <form action="/produtos/update/{{ $produto->id }}" method="POST" enctype="multipart/form-data">

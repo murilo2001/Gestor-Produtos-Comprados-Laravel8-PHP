@@ -34,15 +34,14 @@ header{
 }
 
 .btn-primary{
-    background-color: #F2A340;
-    border: 2px solid #C28008; 
+    background-color: #f24c40;
+    border: 2px solid #ca3e34;
 }
 
 .btn-primary:hover{
-    background-color: #C28008;
-    border-color: #C28008;
+    background-color: #ca3e34;
+    border-color: #ca3e34;
 }
-
 
 /* navbar */
 #navbar img{
@@ -61,13 +60,13 @@ header{
 }
 
 #navbar a:hover{
-    color: #F2A340;
+    color: #f24c40;
 }
 
 
 /* Search Container */
 #search-container{
-    background-image: url("../img/banner.jpg ");
+    background-image: url("../img/banner.jpeg");
     background-size: cover;
     background-position: center;
     height: 400px;
@@ -76,7 +75,7 @@ header{
 }
 
 #search-container h1{
-    color: #F2A340;
+    color: #f24c40;
     margin-bottom: 30px;
     font-weight: 900;
 }
@@ -87,16 +86,16 @@ header{
 }
 
 
-/* Lista de Eventos */
-#eventos-container{
+/* Lista de Produtos */
+#produtos-container{
     padding: 50px;
 }
 
-#eventos-container h2{
+#produtos-container h2{
     margin-bottom: 10px;
 }
 
-#eventos-container .subtitle{
+#produtos-container .subtitle{
     color: #757575;
     margin-bottom: 30px;
 }
@@ -105,7 +104,7 @@ header{
     display: flex;
 }
 
-#eventos-container .card{
+#produtos-container .card{
     flex: 1 1 24%;
     max-width: 25%;
     border-radius: 10px;
@@ -113,7 +112,7 @@ header{
     margin: .5%;
 }
 
-#eventos-container img{
+#produtos-container img{
     max-height: 150px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -138,31 +137,31 @@ header{
 
 .observacao{
     font-size: 12px;
-    background-color: #F2A340;
+    background-color: #f24c40;
     border-radius: 5px;
 }
 
-/* evento create page */
-#evento-create-container{
+/* produto create page */
+#produto-create-container{
     padding: 30px;
 }
 
-#evento-create-container label{
+#produto-create-container label{
     font-weight: bold;
 }
 
-#evento-create-container input,
-#evento-create-container select,
-#evento-create-container textarea{
+#produto-create-container input,
+#produto-create-container select,
+#produto-create-container textarea{
     font-size: 12px;
 }
 
-#evento-create-container textarea{
+#produto-create-container textarea{
     margin-bottom: 10px;
 }
 
 
-/* Evento page */
+/* Produto page */
 #image-container,
 #info-container {
   margin-top: 30px;
@@ -191,11 +190,11 @@ header{
 
 #info-container ion-icon {
   font-size: 20px;
-  color: #F2A340;
+  color: #f24c40;
   margin-right: 5px;
 }
 
-#info-container #evento-submit {
+#info-container #produto-submit {
   margin: 20px 0;
 }
 
@@ -219,11 +218,11 @@ header{
     margin-top: 30px;
 }
 
-.dashboard-eventos-container th{
+.dashboard-produtos-container th{
     width: 25%;
 }
 
-.dashboard-eventos-container form{
+.dashboard-produtos-container form{
     display: inline-block;
 }
 

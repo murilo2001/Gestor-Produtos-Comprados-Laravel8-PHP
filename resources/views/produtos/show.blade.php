@@ -18,11 +18,12 @@
             <p><ion-icon name="alarm-outline"></ion-icon>Tempo de Garantia Restante: {{ $produto->tempo_garantia_meses }}</p>
             <p><ion-icon name="document-text-outline"></ion-icon>Observação: {{ $produto->observacao }}</p>
             <form action="/produtos/download/{{ $produto->id }}" method="GET">
-                <a href="/produtos/download/{{ $produto->id }}" 
-                   style="font-size: 14px" 
-                   class="btn btn-dark"><ion-icon 
-                   name="cloud-download-outline"></ion-icon> Download Imagem Nota Fiscal 
-                </a>
+                <button 
+                    style="font-size: 14px"
+                    type="submit"
+                    class="btn btn-dark"><ion-icon
+                    name="download-outline"></ion-icon> Download Imagem Nota Fiscal
+                </button>
             </form>
     </div>
 </div>
