@@ -141,6 +141,11 @@ header{
     border-radius: 5px;
 }
 
+#font-red{
+    color: #f24c40;
+    font-weight: bold;
+}
+
 /* produto create page */
 #produto-create-container{
     padding: 30px;

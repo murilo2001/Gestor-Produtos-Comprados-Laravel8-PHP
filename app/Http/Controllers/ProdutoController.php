@@ -7,6 +7,9 @@ use App\Models\Produto;
 use App\Models\User;
 use App\Models\Categoria;
 use Response;
+use DateTime;
+use Carbon\Carbon;
+
 
 class ProdutoController extends Controller
 {
@@ -114,8 +117,33 @@ class ProdutoController extends Controller
         não retornar nada dispara uma Exception = Illuminate\Database\Eloquent\ModelNotFoundException */
         $produto = Produto::findOrFail($id);
 
-        /* Retorna a view produtos.show e envia o produto contido na variavel $produto para lá */
-        return view('produtos.show', ['produto' => $produto]);
+        $tempoRestante;
+
+        /* Verifica a data que foi realizado a aquisição do produto e soma a quantidade de tempo de gerantia */
+        $dataCompra = $produto->data_compra;
+
+        /* Converte a data de expiração da garantia em segundos */
+        $dataExpiracaoGarantia = strtotime($dataCompra . "+{$produto->tempo_garantia_meses} months");
+
+        /* Converte a data/hora atual em segundos */
+        $dataAtual = strtotime("now");
+
+        /* Verifica se a garantia ainda não venceu */
+        if($dataExpiracaoGarantia > $dataAtual){
+            
+            /* Calcula a diferença em segundos entre as datas */
+            $diferenca = $dataExpiracaoGarantia - $dataAtual;
+            /* Calcula a diferença em dias */
+            $dias = $diferenca / (60 * 60 * 24);
+            /* ceil = arredonda o numero caso esteja quebrado */
+            $dias = ceil($dias);
+            
+            $tempoRestante = "prazo restante: {$dias} dia(s)";
+        }else{
+            $tempoRestante = 'garantia vencida'; 
+        }
+        
+        return view('produtos.show', ['produto' => $produto,'tempoRestante' => $tempoRestante]);
     }
 
     public function download_nota_fiscal_image($id){
