@@ -12,7 +12,6 @@ class CreateProdutosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nome');
-            $table->string('categoria');
             $table->decimal('valor', 10, 2);
             $table->date('data_compra');
             $table->integer('tempo_garantia_meses');

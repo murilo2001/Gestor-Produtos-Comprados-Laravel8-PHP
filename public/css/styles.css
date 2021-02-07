@@ -43,6 +43,12 @@ header{
     border-color: #ca3e34;
 }
 
+.validacao-container{
+    color: #f24c40;
+    list-style-type: none;
+}
+
+
 /* navbar */
 #navbar img{
     width: 40px;

@@ -7,8 +7,9 @@ use App\Models\Produto;
 use App\Models\User;
 use App\Models\Categoria;
 use Response;
-use DateTime;
 use Carbon\Carbon;
+use App\Http\Requests\ProdutoRequest;
+use App\Http\Requests\CategoriaRequest;
 
 
 class ProdutoController extends Controller
@@ -25,51 +26,33 @@ class ProdutoController extends Controller
         return view('produtos.cadastrar',['categorias'=> $categorias]);
     }
 
-    public function store(Request $request)
+    public function store(ProdutoRequest $request)
     {
-
-        /* Cria uma nova entidade Produto*/
-        $produto = new Produto;
-
         /* Resgata a entidade do usuario */
         $user = auth()->user();
 
-        /* Seta os atributos à entidade*/
-        $produto->nome = $request->nome;
-        $produto->categoria = $request->categoria;
-        $produto->valor = $request->valor;
-        $produto->data_compra = $request->data_compra;
-        $produto->tempo_garantia_meses = $request->tempo_garantia_meses;
-        $produto->observacao = $request->observacao;
-        $produto->user_id = $user->id;
+        /* Resgata a requisição e edita alguns parametros */
+        $requestData = $request->all();
+        $requestData['user_id'] = $user->id;
 
-        /* Resgata o ID da categoria selecionada pelo usuario */
-        $categoriaId = Categoria::where([
-            ['nome', '=', $request->categoria]
-        ])->get()[0]->id;
-        
-        $produto->categoria_id = $categoriaId;
-
-        /* Image Upload*/
-        /* Verifica se possui alguma imagem no request e se ela é valida */
-        if($request->hasFile('nota_fiscal_image') && $request->file('nota_fiscal_image')->isValid()){
-            
+        if($request->nota_fiscal_image){
             /* Resgata a imagem da request */
             $requestImage = $request->nota_fiscal_image;
 
             /* Resgata a extensão da imagem */
             $extension = $requestImage->extension();
-
+            
             /* Resgata o nome da imagem concatenado com o tempo now (agora) concatenado com a extensao
             OBS: O md5 gera uma string alfa-numérica de 32 caracteres */
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
 
             /* Move a imagem que foi feito o upload para a pasta img/nota_fiscal_img_upload_user */
             $requestImage->move(public_path('img/nota_fiscal_img_upload_user'), $imageName);
-            $produto->nota_fiscal_image = $imageName;
+
+            $requestData['nota_fiscal_image'] = $imageName;
         }
 
-        $produto->save();
+        Produto::create($requestData);
 
         return redirect('/')->with('msg','Produto cadastrado com sucesso');
     }
@@ -85,17 +68,18 @@ class ProdutoController extends Controller
         return view('produtos.edit',['produto' => $produto, 'categorias' => $categorias]);
     }
 
-    public function update(Request $request)
+    public function update(ProdutoRequest $request)
     {
         $entidade = $request->all();
-
-        /* Image Upload*/
-        /* Verifica se possui alguma imagem no request e se ela é valida */
-        if($request->hasFile('nota_fiscal_image') && $request->file('nota_fiscal_image')->isValid()){
+ 
+        if($request->nota_fiscal_image){
+            /* Image Upload*/
             /* Resgata a imagem da request */
             $requestImage = $request->nota_fiscal_image;
+
             /* Resgata a extensão da imagem */
             $extension = $requestImage->extension();
+
             /* Resgata o nome da imagem concatenado com o tempo now (agora) concatenado com a extensao
             OBS: O md5 gera uma string alfa-numérica de 32 caracteres */
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
@@ -178,14 +162,16 @@ class ProdutoController extends Controller
         return redirect('/dashboard')->with('msg', 'Produto excluido com sucesso');
     }
 
-    public function store_categoria(Request $request)
+    public function store_categoria(CategoriaRequest $request)
     {
         /* Cria uma nova entidade Produto*/
         $categoria = new Categoria;
 
         /* Seta os atributos à entidade*/
         $categoria->nome = $request->nome_categoria;
+
         $categoria->save();
+
         return redirect('/produtos/cadastrar')->with('msg', 'Categoria criada com sucesso');
     }
 }
