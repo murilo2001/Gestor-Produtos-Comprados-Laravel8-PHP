@@ -10,7 +10,6 @@ class CreateProdutosTable extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->string('nome');
             $table->decimal('valor', 10, 2);
             $table->date('data_compra');
@@ -19,6 +18,7 @@ class CreateProdutosTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->timestamps();
         });
     }
 

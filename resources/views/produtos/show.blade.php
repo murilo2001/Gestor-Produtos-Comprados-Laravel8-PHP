@@ -14,6 +14,7 @@
             <h1>{{ $produto->nome }}</h1>
             <p><ion-icon name="bag-handle-outline"></ion-icon>Categoria: {{ $produto->categoria->nome }}</p>
             <p><ion-icon name="cash-outline"></ion-icon>Valor: {{ $produto->valor }}</p>
+            <p><ion-icon name="business-outline"></ion-icon>Estabelecimento de Compra: {{ $produto->estabelecimento_compra }}</p>
             <p><ion-icon name="calendar-number-outline"></ion-icon>Data de Compra: {{ $produto->data_compra->format('d/m/Y') }}</p>
             <p><ion-icon name="alarm-outline"></ion-icon>Tempo de Garantia: {{ $produto->tempo_garantia_meses }} meses, <span id="font-red"> {{ $tempoRestante }} </span></p>
             <p><ion-icon name="document-text-outline"></ion-icon>Observação: {{ $produto->observacao }}</p>

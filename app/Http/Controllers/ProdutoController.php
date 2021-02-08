@@ -30,6 +30,8 @@ class ProdutoController extends Controller
     {
         /* Resgata a entidade do usuario */
         $user = auth()->user();
+        //estabelecimento_compra
+        //dd($request->all());
 
         /* Resgata a requisição e edita alguns parametros */
         $requestData = $request->all();
@@ -51,7 +53,7 @@ class ProdutoController extends Controller
 
             $requestData['nota_fiscal_image'] = $imageName;
         }
-
+        //dd($requestData);
         Produto::create($requestData);
 
         return redirect('/')->with('msg','Produto cadastrado com sucesso');

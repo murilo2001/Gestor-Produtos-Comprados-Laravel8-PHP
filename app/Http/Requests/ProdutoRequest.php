@@ -28,6 +28,7 @@ class ProdutoRequest extends FormRequest
             'nome' => 'bail|required|min:2|max:120',
             'categoria_id' => 'bail|required',
             'valor' => 'bail|required|numeric',
+            'estabelecimento_compra' => 'bail|required|string|min:2|max:90',
             'data_compra' => 'bail|required|date',
             'tempo_garantia_meses' => 'bail|required|integer',
             'nota_fiscal_image' => 'bail|image|max:2048', /* Verifica se o arquivo que foi feito upload é uma imagem e se tem o tamanho até 2MB = 2048KB */
@@ -44,7 +45,8 @@ class ProdutoRequest extends FormRequest
             'nome' => 'produto',
             'categoria_id' => 'categoria',
             'nota_fiscal_image' => 'nota fiscal imagem',
-            'data_compra' => 'data de compra'
+            'data_compra' => 'data de compra',
+            'estabelecimento_compra' => 'estabelecimento de compra'
         ];
     }
 }

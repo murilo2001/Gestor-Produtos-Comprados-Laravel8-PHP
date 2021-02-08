@@ -19,6 +19,7 @@ class Produto extends Model
         'nome',
         'nota_fiscal_image',
         'valor',
+        'estabelecimento_compra',
         'data_compra',
         'tempo_garantia_meses',
         'observacao',

@@ -60,6 +60,16 @@
         </div>
         <br>
         <div class="form-group">
+            <label for="valor">Estabelecimento de Compra</label><font color="red">*</font>
+            <input type="text" class="form-control" id="estabelecimento_compra" name="estabelecimento_compra" placeholder="Nome do Estabelecimento">
+            {{-- @error = diretiva do blade para identificar erro de validação para determinado campo,
+                caso encontrar ira imprimir tudo que estiver dentro do @error --}}
+            @error('estabelecimento_compra')
+                <span class="validacao-container"><small>{{$message}}</small></span> 
+             @enderror
+        </div>
+        <br>
+        <div class="form-group">
             <label for="data_compra">Data de compra</label><font color="red">*</font>
             <input type="date" class="form-control" id="data_compra" name="data_compra">
             {{-- @error = diretiva do blade para identificar erro de validação para determinado campo,

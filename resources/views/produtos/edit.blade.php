@@ -49,6 +49,14 @@
     </div>
     <br>
     <div class="form-group">
+        <label for="nome">Estabelecimento de Compra</label><font color="red">*</font>
+        <input type="text" class="form-control" id="estabelecimento_compra" name="estabelecimento_compra" placeholder="Nome do Estabelecimento" value="{{ $produto->estabelecimento_compra }}">
+        @error('estabelecimento_compra')
+            <span class="validacao-container"><small>{{$message}}</small></span> 
+        @enderror
+    </div>
+    <br>
+    <div class="form-group">
         <label for="data_compra">Data de Compra</label><font color="red">*</font>
         <input type="date" class="form-control" id="data_compra" name="data_compra" value="{{ $produto->data_compra->format('Y-m-d') }}" >
         @error('data_compra')

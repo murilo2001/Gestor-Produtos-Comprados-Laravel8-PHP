@@ -24,8 +24,6 @@ class CategoriaController extends Controller
 
     public function destroy($id)
     {
-        // dd('teste');
-        // dd($id);
         /* O metodo estatico findOrFail ou firstOrFail recupera o primeiro resultado da consulta, porem caso
         não retornar nada dispara uma Exception = Illuminate\Database\Eloquent\ModelNotFoundException,
         o ->delete() apaga esse registro do banco caso encontrar */
