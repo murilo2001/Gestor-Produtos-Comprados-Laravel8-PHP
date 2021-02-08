@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\CategoriaController;
 
 /* Rota GET para redirecionar usuario para view index */
 Route::get('/',[ProdutoController::class, 'index']);
@@ -30,5 +31,8 @@ Route::get('/dashboard', [ProdutoController::class, 'dashboard'])->middleware('a
 /* Rota DELETE para redirecionar usuario para a action destroy cujá função é a deleção de um registro do banco de dados */
 Route::delete('/produtos/{id}', [ProdutoController::class, 'destroy'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados
 
+/* Rota DELETE para redirecionar usuario para a action destroy cujá função é a deleção de um registro do banco de dados */
+Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados
+
 /* Rota POST para encaminhar request para action (store_categoria) cujá função é o cadastro de categorias no banco de dados */
-Route::post('/categorias',[ProdutoController::class, 'store_categoria'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados
+Route::post('/categorias',[CategoriaController::class, 'store'])->middleware('auth'); //->middleware('auth') rota excluisa para usuarios logados

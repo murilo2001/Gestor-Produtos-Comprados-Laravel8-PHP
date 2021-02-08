@@ -148,8 +148,10 @@ class ProdutoController extends Controller
         /* Resgata todos produtos do usuario */
         $produtos = $user->produtos;
 
+        $categorias = Categoria::all();
+
         /* Retorna todos os produtos para a view dashboard */
-        return view('dashboard', ['produtos' => $produtos]);
+        return view('dashboard', ['produtos' => $produtos, 'categorias' => $categorias]);
     }
 
     public function destroy($id)
@@ -160,18 +162,5 @@ class ProdutoController extends Controller
         $produto = Produto::findOrFail($id)->delete();
 
         return redirect('/dashboard')->with('msg', 'Produto excluido com sucesso');
-    }
-
-    public function store_categoria(CategoriaRequest $request)
-    {
-        /* Cria uma nova entidade Produto*/
-        $categoria = new Categoria;
-
-        /* Seta os atributos à entidade*/
-        $categoria->nome = $request->nome_categoria;
-
-        $categoria->save();
-
-        return redirect('/produtos/cadastrar')->with('msg', 'Categoria criada com sucesso');
     }
 }

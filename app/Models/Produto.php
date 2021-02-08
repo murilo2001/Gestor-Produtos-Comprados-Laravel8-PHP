@@ -14,6 +14,7 @@ class Produto extends Model
     especifico */
     protected $guarded = [];
 
+    /* Atribuição em Massa */
     protected $fillable = [
         'nome',
         'nota_fiscal_image',
