@@ -98,7 +98,7 @@
                 <span class="validacao-container"><small>{{$message}}</small></span> 
              @enderror
         </div>
-        <input type="submit" class="btn btn-primary" value="Cadastrar Produto">
+        <input type="submit" class="btn btn-danger" value="Cadastrar Produto">
     </form>
 </div>
 
@@ -129,7 +129,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Criar categoria</button>
+                <button type="submit" class="btn btn-danger">Criar categoria</button>
             </div>
             </form>
         </div>

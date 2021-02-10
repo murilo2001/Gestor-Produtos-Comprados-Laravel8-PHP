@@ -70,7 +70,7 @@
             </div>
         </main>
         <footer>
-           <p>Gestor de Produtos Comprados &copy; 2021</p>
+           <p>Registro de Compras &copy; 2021</p>
         </footer>
         
         <!-- JS BOOTSTRAP -->    

@@ -80,7 +80,7 @@
         @enderror
     </div>
     <br>
-        <input type="submit" class="btn btn-primary" value="Finalizar Edição">
+        <input type="submit" class="btn btn-danger" value="Finalizar Edição">
     </form>
 </div>
 
