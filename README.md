@@ -1,9 +1,5 @@
-<div align="center">
-    <img src="./public/img/overview.gif">
-</div>
-<br>
 <h1 align="center">
-    <img src="./public/img/logo.png">
+    <img src="./public/img/overview.gif">
     <p>Evite acúmulo de papéis desnecessários e faça uma gestão inteligente de suas aquisições materiais! 🗃🗃</p>
 </h1>
 
